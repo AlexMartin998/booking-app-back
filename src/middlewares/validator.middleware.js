@@ -62,3 +62,40 @@ export const hotelIdRules = () => [
   param('id').custom(id => idExistInDB(id, 'hotel')),
   validate,
 ];
+
+// Room
+export const createRoomRules = () => [
+  param('hotelId', 'Invalid ID!').isMongoId(),
+  validate,
+
+  param('hotelId').custom(hotelId => idExistInDB(hotelId, 'hotel')),
+  validate,
+
+  body('title', 'Title date is required!').not().isEmpty(),
+  body('price', 'Price is required!').not().isEmpty(),
+  body('maxPeople', 'Max People is required!').not().isEmpty(),
+  body('description', 'Description date is required!').not().isEmpty(),
+  body('roomNumbers', 'Room Numbers are required!').not().isEmpty(),
+
+  validate,
+];
+
+export const roomIdRules = () => [
+  param('id', 'Invalid ID!').isMongoId(),
+  validate,
+
+  param('id').custom(id => idExistInDB(id, 'room')),
+  validate,
+];
+
+export const deleteRoomIdRules = () => [
+  param('id', 'Invalid ID!').isMongoId(),
+  validate,
+  param('id').custom(id => idExistInDB(id, 'room')),
+  validate,
+
+  param('hotelId', 'Invalid ID!').isMongoId(),
+  validate,
+  param('hotelId').custom(hotelId => idExistInDB(hotelId, 'hotel')),
+  validate,
+];

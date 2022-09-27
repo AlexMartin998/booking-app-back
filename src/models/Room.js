@@ -33,4 +33,15 @@ const RoomSchema = new Schema(
   }
 );
 
+RoomSchema.methods.toJSON = function () {
+  const room = this.toObject();
+  room.id = room._id;
+
+  delete room._id;
+  delete room.createdAt;
+  delete room.updatedAt;
+
+  return room;
+};
+
 export default model('Room', RoomSchema);

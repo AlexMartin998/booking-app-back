@@ -64,4 +64,15 @@ const HotelSchema = new Schema(
   }
 );
 
+HotelSchema.methods.toJSON = function () {
+  const hotel = this.toObject();
+  hotel.id = hotel._id;
+
+  delete hotel._id;
+  delete hotel.createdAt;
+  delete hotel.updatedAt;
+
+  return hotel;
+};
+
 export default model('Hotel', HotelSchema);

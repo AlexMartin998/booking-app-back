@@ -22,10 +22,10 @@ const app = express();
 setupMiddlewares(app);
 
 // Router
-app.use('/auth', authRouter);
-app.use('/hotels', hotelsRouter);
-app.use('/rooms', roomsRouter);
-app.use('/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/hotels', hotelsRouter);
+app.use('/api/rooms', roomsRouter);
+app.use('/api/users', usersRouter);
 
 app.use(notFound);
 app.use(errorHandler);

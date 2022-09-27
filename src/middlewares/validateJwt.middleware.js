@@ -25,7 +25,7 @@ export const protectWithJwt = async (req, res, next) => {
 };
 
 export const isAdminOrSameUser = (req, _res, next) => {
-  if (!req.authenticatedUser.email)
+  if (!req.authenticatedUser.username)
     return next(createError(403, 'You are not authorized!'));
 
   const { id, isAdmin } = req.authenticatedUser;
@@ -35,8 +35,8 @@ export const isAdminOrSameUser = (req, _res, next) => {
   return next(createError(403, 'You are not authorized!'));
 };
 
-export const verifyAdmin = (req, res, next) => {
-  if (!req.authenticatedUser.email)
+export const verifyAdmin = (req, _res, next) => {
+  if (!req.authenticatedUser.username)
     return next(createError(403, 'You are not authorized!'));
 
   const { isAdmin } = req.authenticatedUser;

@@ -1,6 +1,6 @@
 'use strict';
 
-import { Hotel, User } from '../models/index.js';
+import { Hotel, Room, User } from '../models/index.js';
 
 export const isAlreadyRegistered = async (query, collection) => {
   let model;
@@ -32,8 +32,7 @@ export const idExistInDB = async (id, collection) => {
   let model;
 
   const checkInCollection = () => {
-    if (!model)
-      throw new Error(`${collection} ID: '${id} doesn't exist!`);
+    if (!model) throw new Error(`${collection} ID: '${id} doesn't exist!`);
   };
 
   switch (collection) {
@@ -43,6 +42,10 @@ export const idExistInDB = async (id, collection) => {
 
     case 'hotel':
       model = await Hotel.findById(id);
+      return checkInCollection();
+
+    case 'room':
+      model = await Room.findById(id);
       return checkInCollection();
 
     default:
