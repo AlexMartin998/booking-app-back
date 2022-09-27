@@ -24,24 +24,24 @@ export const protectWithJwt = async (req, res, next) => {
   }
 };
 
-export const verifyUser = (req, res, next) => {
-  protectWithJwt(req, res, next, () => {
-    if (
-      req.authenticatedUser.id === req.params.id ||
-      req.authenticatedUser.isAdmin
-    )
-      return next();
-  });
+export const isAdminOrSameUser = (req, _res, next) => {
+  if (!req.authenticatedUser.email)
+    return next(createError(403, 'You are not authorized!'));
+
+  const { id, isAdmin } = req.authenticatedUser;
+
+  if (id.toString() === req.params.id || isAdmin) return next();
 
   return next(createError(403, 'You are not authorized!'));
 };
 
 export const verifyAdmin = (req, res, next) => {
-  protectWithJwt(req, res, next, () => {
-    if (req.authenticatedUser.isAdmin) {
-      return next();
-    }
-
+  if (!req.authenticatedUser.email)
     return next(createError(403, 'You are not authorized!'));
-  });
+
+  const { isAdmin } = req.authenticatedUser;
+
+  if (isAdmin) return next();
+
+  return next(createError(403, 'You are not authorized!'));
 };

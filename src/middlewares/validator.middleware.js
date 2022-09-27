@@ -1,7 +1,7 @@
 'use strict';
 
-import { body, validationResult } from 'express-validator';
-import { isAlreadyRegistered } from '../helpers/index.js';
+import { body, param, validationResult } from 'express-validator';
+import { idExistInDB, isAlreadyRegistered } from '../helpers/index.js';
 
 export const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -32,3 +32,12 @@ export const signUpRules = () => [
 ];
 
 export const loginRules = () => [...emailPassRules(), validate];
+
+// User
+export const userIdRules = () => [
+  param('id', 'Invalid ID!').isMongoId(),
+  validate,
+
+  param('id').custom(id => idExistInDB(id, 'user')),
+  validate,
+];

@@ -27,3 +27,21 @@ export const isAlreadyRegistered = async (query, collection) => {
       throw new Error('Something went wrong!');
   }
 };
+
+export const idExistInDB = async (id, collection) => {
+  let model;
+
+  const checkInCollection = () => {
+    if (!model)
+      throw new Error(`${collection} ID: '${id} doesn't exist in DB!`);
+  };
+
+  switch (collection) {
+    case 'user':
+      model = await User.findById(id);
+      return checkInCollection();
+
+    default:
+      throw new Error('Something went wrong!');
+  }
+};
