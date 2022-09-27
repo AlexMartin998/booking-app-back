@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo
+    restart: always
+    ports:
+      - '2717:27017'
+    volumes:
+      - mongo_data:/data/db
+    logging:
+      driver: none
+
+  api:
+    container_name: api_node
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3300:3000'
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo_db:27017/booking
+      SECRETORPRIVATEKEY_JWT: sWEhOS30NfdWdG32-344sF_sdsADJ45-fedDFGGHTX
+    links:
+      - mongo_db
+    depends_on:
+      - mongo_db
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  mongo_data:
