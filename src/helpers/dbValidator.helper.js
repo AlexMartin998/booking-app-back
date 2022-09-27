@@ -1,6 +1,6 @@
 'use strict';
 
-import { User } from '../models/index.js';
+import { Hotel, User } from '../models/index.js';
 
 export const isAlreadyRegistered = async (query, collection) => {
   let model;
@@ -33,12 +33,16 @@ export const idExistInDB = async (id, collection) => {
 
   const checkInCollection = () => {
     if (!model)
-      throw new Error(`${collection} ID: '${id} doesn't exist in DB!`);
+      throw new Error(`${collection} ID: '${id} doesn't exist!`);
   };
 
   switch (collection) {
     case 'user':
       model = await User.findById(id);
+      return checkInCollection();
+
+    case 'hotel':
+      model = await Hotel.findById(id);
       return checkInCollection();
 
     default:

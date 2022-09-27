@@ -24,6 +24,10 @@ const HotelSchema = new Schema(
       required: [true, 'Address is required!'],
       trim: true,
     },
+    distance: {
+      type: String,
+      required: true,
+    },
     photos: {
       type: [String],
     },

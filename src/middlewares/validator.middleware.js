@@ -41,3 +41,24 @@ export const userIdRules = () => [
   param('id').custom(id => idExistInDB(id, 'user')),
   validate,
 ];
+
+// Hotel
+export const createHotelRules = () => [
+  body('name', 'Name is required!').not().isEmpty(),
+  body('type', 'Type is required!').not().isEmpty(),
+  body('city', 'City is required!').not().isEmpty(),
+  body('address', 'Address is required!').not().isEmpty(),
+  body('distance', 'Distance date is required!').not().isEmpty(),
+  body('title', 'Title date is required!').not().isEmpty(),
+  body('description', 'Description date is required!').not().isEmpty(),
+  body('cheapestPrice', 'Cheapest price date is required!').not().isEmpty(),
+  validate,
+];
+
+export const hotelIdRules = () => [
+  param('id', 'Invalid ID!').isMongoId(),
+  validate,
+
+  param('id').custom(id => idExistInDB(id, 'hotel')),
+  validate,
+];
