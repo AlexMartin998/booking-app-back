@@ -1,6 +1,8 @@
 'use strict';
 
 import { Router } from 'express';
+
+import { protectWithJwt, verifyAdmin } from '../middlewares/index.js';
 import {
   createHotel,
   deleteHotel,
@@ -11,8 +13,15 @@ import {
 
 const router = Router();
 
-router.route('/').post(createHotel).get(getHotels);
+router
+  .route('/')
+  .post([protectWithJwt, verifyAdmin], createHotel)
+  .get(getHotels);
 
-router.route('/:id').put(updateHotel).delete(deleteHotel).get(getHotel);
+router
+  .route('/:id')
+  .put([protectWithJwt, verifyAdmin], updateHotel)
+  .delete([protectWithJwt, verifyAdmin], deleteHotel)
+  .get(getHotel);
 
 export default router;

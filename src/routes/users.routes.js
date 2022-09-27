@@ -17,6 +17,7 @@ import {
 
 const router = Router();
 
+// TODO: incluir protectWithJwt en verifyAdmin
 // Protect all routes
 router.use(protectWithJwt);
 
