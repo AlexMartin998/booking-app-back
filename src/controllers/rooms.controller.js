@@ -2,20 +2,19 @@
 
 import { Hotel, Room } from '../models/index.js';
 
-export const createRoom = async (req, res, _next) => {
+export const createRoom = async (req, res, next) => {
   const { hotelId } = req.params;
 
   const newRoom = new Room(req.body);
 
   try {
-    await newRoom.save();
+    const savedRoom = await newRoom.save();
 
-    await Hotel.findByIdAndUpdate(hotelId, { $push: { rooms: newRoom.id } });
+    await Hotel.findByIdAndUpdate(hotelId, { $push: { rooms: savedRoom._id } });
 
     res.status(200).json({ ok: true, room: newRoom });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ err: 'Error' });
+    next(error);
   }
 };
 
@@ -33,6 +32,28 @@ export const updateRoom = async (req, res, next) => {
       ok: true,
       room: updatedRoom,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Update nested properties
+export const updateRoomAvailability = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await Room.updateOne(
+      { 'roomNumbers._id': id },
+      {
+        $push: {
+          'roomNumbers.$.unavailableDates': req.body.dates,
+        },
+      }
+    );
+
+    res
+      .status(200)
+      .json({ ok: true, message: 'Room status has been updated.' });
   } catch (error) {
     next(error);
   }

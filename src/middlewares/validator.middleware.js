@@ -99,3 +99,11 @@ export const deleteRoomIdRules = () => [
   param('hotelId').custom(hotelId => idExistInDB(hotelId, 'hotel')),
   validate,
 ];
+
+export const roomNumberIdRules = () => [
+  param('id', 'Invalid ID!').isMongoId(),
+  validate,
+
+  body('dates', 'Dates are required!').not().isEmpty(),
+  validate,
+];

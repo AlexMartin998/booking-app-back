@@ -5,8 +5,10 @@ import { Router } from 'express';
 import {
   createRoomRules,
   deleteRoomIdRules,
+  isAdminOrSameUser,
   protectWithJwt,
   roomIdRules,
+  roomNumberIdRules,
   verifyAdmin,
 } from '../middlewares/index.js';
 import {
@@ -15,6 +17,7 @@ import {
   getRoom,
   getRooms,
   updateRoom,
+  updateRoomAvailability,
 } from '../controllers/index.js';
 
 const router = Router();
@@ -28,6 +31,8 @@ router
   .route('/:id')
   .put([protectWithJwt, verifyAdmin, ...roomIdRules()], updateRoom)
   .get(roomIdRules(), getRoom);
+
+router.put('/availability/:id', updateRoomAvailability);
 
 router.delete(
   '/:id/:hotelId',

@@ -9,6 +9,7 @@ import { createError } from '../utils/error.js';
 // check token in req.cookies
 export const protectWithJwt = async (req, res, next) => {
   const tokenJwt = req.cookies.access_token;
+  console.log(req.cookies);
   if (!tokenJwt) return next(createError(401, 'You are not authenticated!'));
 
   try {

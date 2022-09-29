@@ -9,9 +9,12 @@ import {
   verifyAdmin,
 } from '../middlewares/index.js';
 import {
+  countByCity,
+  countByType,
   createHotel,
   deleteHotel,
   getHotel,
+  getHotelRooms,
   getHotels,
   updateHotel,
 } from '../controllers/index.js';
@@ -24,9 +27,13 @@ router
   .get(getHotels);
 
 router
-  .route('/:id')
+  .route('/find/:id')
   .put([protectWithJwt, verifyAdmin, ...hotelIdRules()], updateHotel)
   .delete([protectWithJwt, verifyAdmin, ...hotelIdRules()], deleteHotel)
   .get(hotelIdRules(), getHotel);
+
+router.get('/count-by-city', countByCity);
+router.get('/count-by-type', countByType);
+router.get('/room/:id', hotelIdRules(), getHotelRooms);
 
 export default router;
