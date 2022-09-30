@@ -23,8 +23,6 @@ export const setupMiddlewares = app => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static('./src/public'));
-  // app.use(express.static(path.join(__dirname, './../public')));
-
   app.use(compression()).use(helmet());
   app.use(morgan('dev'));
 

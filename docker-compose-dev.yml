@@ -17,12 +17,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    env_file: ./.env
     ports:
-      - '3300:3000'
+      - 3300:$PORT
     environment:
-      PORT: 3000
-      MONGODB_URI: mongodb://mongo_db:27017/booking
-      SECRETORPRIVATEKEY_JWT: sWEhOS30NfdWdG32-344sF_sdsADJ45-fedDFGGHTX
+      - PORT=$PORT
+      - MONGODB_URI=$MONGODB_URI
+      - SECRETORPRIVATEKEY_JWT=$SECRETORPRIVATEKEY_JWT
     links:
       - mongo_db
     depends_on:

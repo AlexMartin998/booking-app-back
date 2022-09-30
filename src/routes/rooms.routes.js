@@ -5,10 +5,8 @@ import { Router } from 'express';
 import {
   createRoomRules,
   deleteRoomIdRules,
-  isAdminOrSameUser,
   protectWithJwt,
   roomIdRules,
-  roomNumberIdRules,
   verifyAdmin,
 } from '../middlewares/index.js';
 import {
