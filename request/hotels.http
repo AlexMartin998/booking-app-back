@@ -1,19 +1,35 @@
 ### Get hotels
-GET http://localhost:3300/hotels
+GET http://localhost:3300/api/hotels
 
 
 ### Create a hotel
-POST http://localhost:3300/hotels
-
+POST http://localhost:3300/api/hotels
 Content-Type: application/json
 
 {
-  "name": "Hotel John",
+  "name": "Hilton Berlin",
   "type": "hotel",
-  "city": "Berlin",
+  "city": "berlin",
   "address": "Somewhere",
-  "distante": "500",
+  "distance": "500",
   "title": "Best Hotel in the City",
   "description": "Some description",
   "cheapestPrice": 100
 }
+
+
+### Update hotel
+PUT http://localhost:3300/api/hotels/find/63370d6b0cae6707d2cd1c44
+Content-Type: application/json
+
+{
+  "name": "Hotel Updated"
+}
+
+
+### Delete hotel
+DELETE http://localhost:3300/api/hotels/find/63370e180cae6707d2cd1c4e
+
+
+### Get hotel
+GET http://localhost:3300/api/hotels/find/63370d6b0cae6707d2cd1c44
