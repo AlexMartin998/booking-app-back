@@ -1,16 +1,34 @@
-# Express API Bootstrap (base / project starter)
-
-This is a repository intended to serve as a starting point if you want to bootstrap a express API project.
+# Booking App - Back end
 
 ## Running the app
 
+### Running with local configuration
+
 ```
 # install dependencies
-yarn
+npm i
 
 # run in dev mode on port 3000
-yarn dev
+npm run dev
 
-# run in prod mode on port 3000
-yarn start
+# generate production build
+npm run build
+
+# run generated content in dist folder on port 3000
+npm run start
 ```
+
+### Running with Docker
+
+Running the app in a development environment with docker on port 3300
+
+```
+docker compose -f docker-compose-dev.yml up --build
+```
+
+## View demo
+
+- You can log in with: `adrian@test.com` and password `test123`
+- Available cities: `london`, `madrid`, `berlin`
+
+[Demo](https://booking-app-react-alxadr.netlify.app)
