@@ -8,5 +8,4 @@ COPY . .
 RUN yarn
 
 CMD [ "yarn", "start"]
-# CMD [ "yarn", "dev"]
 

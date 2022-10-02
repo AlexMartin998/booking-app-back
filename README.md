@@ -6,16 +6,12 @@
 
 ```
 # install dependencies
+yarn
 npm i
 
-# run in dev mode on port 3000
+# run in dev mode on port $PORT
+yarn dev
 npm run dev
-
-# generate production build
-npm run build
-
-# run generated content in dist folder on port 3000
-npm run start
 ```
 
 ### Running with Docker
