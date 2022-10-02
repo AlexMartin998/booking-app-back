@@ -20,6 +20,12 @@ npm run start
 
 ### Running with Docker
 
+Running the app with docker on port 3300
+
+```
+docker compose up --build
+```
+
 Running the app in a development environment with docker on port 3300
 
 ```

@@ -13,18 +13,17 @@ services:
   api:
     container_name: api_node
     build: .
+    env_file: ./.env
     ports:
-      - '4000:3000'
+      - 3300:$PORT
     environment:
-      PORT: 3000
-      MONGODB_URI: mongodb://mongo_db:27017
-      SECRETORKEY_JWT: sWEhOSNWdG32-344s_sdsADJ45-fedDFGGHTX
+      - PORT=$PORT
+      - MONGODB_URI=$MONGODB_URI
+      - SECRETORPRIVATEKEY_JWT=$SECRETORPRIVATEKEY_JWT
     links:
       - mongo_db
     depends_on:
       - mongo_db
-    volumes:
-      - .:/usr/src/app
 
 volumes:
   mongo_data:
